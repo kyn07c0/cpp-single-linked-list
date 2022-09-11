@@ -108,6 +108,8 @@ class SingleLinkedList
             // приводит к неопределённому поведению
             [[nodiscard]] reference operator*() const noexcept
             {
+                assert(node_ != nullptr);
+                
                 return node_->value;
             }
 
@@ -116,6 +118,8 @@ class SingleLinkedList
             // приводит к неопределённому поведению
             [[nodiscard]] pointer operator->() const noexcept
             {
+                assert(node_ != nullptr);
+                
                 return &(node_->value);
             }
 
@@ -212,6 +216,8 @@ class SingleLinkedList
          */
         Iterator InsertAfter(ConstIterator pos, const Type& value)
         {
+            assert(pos.node_ != nullptr);
+            
             Node* new_node = new Node(value, pos.node_->next_node);
             pos.node_->next_node = new_node;
             ++size_;
@@ -225,6 +231,8 @@ class SingleLinkedList
          */
         Iterator EraseAfter(ConstIterator pos) noexcept
         {
+            assert(pos.node_ != nullptr);
+            
             Node* node_for_del = pos.node_->next_node;
             pos.node_->next_node = pos.node_->next_node->next_node;
             delete node_for_del;
